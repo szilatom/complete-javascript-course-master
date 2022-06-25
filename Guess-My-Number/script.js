@@ -1,16 +1,25 @@
 'use strict';
 
-const secretNumber = Math.trunc(Math.random() * 20) + 1;
-
-// for testing
-document.querySelector('.number').textContent = secretNumber;
-//
+let secretNumber = Math.trunc(Math.random() * 20) + 1;
 
 // Set score
 let score = 20;
 
 function classTextMod(className, text) {
   document.querySelector(`.${className}`).textContent = text;
+}
+
+function againBtnClick() {
+  score = 20;
+  secretNumber = Math.trunc(Math.random() * 20) + 1;
+  classTextMod('message', 'Start guessing...');
+  classTextMod('score', score);
+  classTextMod('number', '?');
+  document.querySelector('.guess').value = '';
+  // change body CSS style
+  document.querySelector('body').style.backgroundColor = '#222';
+  // change number color
+  document.querySelector('.number').style.color = '#333';
 }
 
 function checkBtnClick() {
@@ -23,6 +32,8 @@ function checkBtnClick() {
     // When the player win
   } else if (guess === secretNumber) {
     classTextMod('message', 'Correct number');
+    // write the secretNumber
+    document.querySelector('.number').textContent = secretNumber;
     // change body CSS style
     document.querySelector('body').style.backgroundColor = '#60b347';
     // change number color
@@ -53,3 +64,4 @@ function checkBtnClick() {
 }
 
 document.querySelector('.check').addEventListener('click', checkBtnClick);
+document.querySelector('.again').addEventListener('click', againBtnClick);
