@@ -1,9 +1,10 @@
 'use strict';
 
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
-
 // Set score
 let score = 20;
+// Set highscore
+let highscore = 0;
 
 function classTextMod(className, text) {
   document.querySelector(`.${className}`).textContent = text;
@@ -38,6 +39,11 @@ function checkBtnClick() {
     document.querySelector('body').style.backgroundColor = '#60b347';
     // change number color
     document.querySelector('.number').style.color = 'green';
+    // check highscore
+    if (score > highscore) {
+      highscore = score;
+      classTextMod('highscore', highscore);
+    }
 
     // When the guess is too high
   } else if (guess > secretNumber) {
