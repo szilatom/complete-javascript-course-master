@@ -46,7 +46,19 @@ function checkBtnClick() {
     }
 
     // When the guess is too high
-  } else if (guess > secretNumber) {
+  } else if (guess !== secretNumber) {
+    if (score > 1) {
+      let text = guess > secretNumber ? 'Too high' : 'Too low';
+      classTextMod('message', text);
+      score--;
+      classTextMod('score', score);
+    } else {
+      classTextMod('message', 'You lost the game');
+      classTextMod('score', 0);
+    }
+  }
+}
+/*else if (guess > secretNumber) {
     if (score > 1) {
       classTextMod('message', 'Too high');
       score--;
@@ -67,7 +79,7 @@ function checkBtnClick() {
       classTextMod('score', 0);
     }
   }
-}
+}*/
 
 document.querySelector('.check').addEventListener('click', checkBtnClick);
 document.querySelector('.again').addEventListener('click', againBtnClick);
